@@ -1,10 +1,17 @@
 async function enviarMensagem() {
     const entrada = document.getElementById("entrada");
-    const mensagem = entrada.value;
+    const mensagem = entrada.value.trim();
     const container = document.getElementById("mensagens");
 
-    container.innerHTML += `<div class='user'>${mensagem}</div>`;
+    if (!mensagem) return;
+
+    container.innerHTML += `
+        <div class="mensagem user">
+            <strong>Usuário:</strong> ${mensagem}
+        </div>
+    `;
     entrada.value = "";
+    container.scrollTop = container.scrollHeight;
 
     const resposta = await fetch("/perguntar", {
         method: "POST",
@@ -13,5 +20,11 @@ async function enviarMensagem() {
     });
 
     const dados = await resposta.json();
-    container.innerHTML += `<div class='bot'>${dados.resposta}</div>`;
+
+    container.innerHTML += `
+        <div class="mensagem bot">
+            <strong>Bot:</strong> ${dados.resposta}
+        </div>
+    `;
+    container.scrollTop = container.scrollHeight;
 }
