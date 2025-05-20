@@ -17,8 +17,13 @@ def index():
 @app.route("/perguntar", methods=["POST"])
 def perguntar():
     dados = request.get_json()
-    pergunta = dados["mensagem"]
-    resposta = gerar_resposta(pergunta, pdf_texto)
+    pergunta = dados["mensagem"].strip().lower()
+
+    # Verifica se é uma saudação
+    if pergunta in ["oi", "olá", "bom dia", "boa tarde", "boa noite"]:
+        resposta = "Olá, sou o chatbot BemViver! No que posso ajudar?"
+    else:
+        resposta = gerar_resposta(pergunta, pdf_texto)
     return jsonify({"resposta": resposta})
 
 if __name__ == "__main__":
