@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from processamento import extrair_textos_pdfs, extrair_intencao
+from processamento import extrair_textos_pdfs
 from gemini_api import gerar_resposta
 from dotenv import load_dotenv
 import os
