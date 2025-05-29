@@ -15,9 +15,10 @@ def dividir_em_chunks(texto, tamanho=500):
 
 # Carrega e divide textos
 texto = extrair_textos_pdfs([
-    "material/saude_bem_estar.pdf",
+    "material/saude_bem_estar.pdf_0",
     "material/saude_bem_estar_1.pdf",
-    "material/saude_bem_estar_2.pdf"
+    "material/saude_bem_estar_2.pdf",
+    "material/saude_bem_estar_3.pdf"
 ])
 chunks = dividir_em_chunks(texto)
 

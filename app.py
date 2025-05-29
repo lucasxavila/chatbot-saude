@@ -8,9 +8,10 @@ load_dotenv()
 app = Flask(__name__)
 
 pdf_texto = extrair_textos_pdfs([
-    "material/saude_bem_estar.pdf",
+    "material/saude_bem_estar_0.pdf",
     "material/saude_bem_estar_1.pdf",
-    "material/saude_bem_estar_2.pdf"
+    "material/saude_bem_estar_2.pdf",
+    "material/saude_bem_estar_3.pdf"
 ])
 api_key = os.getenv("GEMINI_API_KEY")
 

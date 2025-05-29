@@ -1,8 +1,9 @@
 import os
 import json
 import google.generativeai as genai
-from dotenv import load_dotenv
 import numpy as np
+import markdown
+from dotenv import load_dotenv
 
 load_dotenv()  # Carrega a chave da API do .env
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
@@ -35,10 +36,19 @@ def buscar_chunks_relevantes(pergunta, top_k=5):
 def gerar_resposta(pergunta, _contexto=None):
     try:
         contexto = "\n".join(buscar_chunks_relevantes(pergunta))
-        prompt = f"Baseando-se no conteúdo abaixo, responda com clareza e precisão:\n\n{contexto}\n\nPergunta: {pergunta}"
+        prompt = (
+            f"Você é um assistente de saúde e bem-estar. Responda à pergunta abaixo com confiança, "
+            f"clareza e em tom natural, como se estivesse conversando diretamente com o usuário. "
+            f"Não cite fontes ou diga que está se baseando em um texto."
+            f"Use apenas as informações a seguir:\n\n{contexto}\n\nPergunta: {pergunta}"
+        )
 
         model = genai.GenerativeModel("gemini-1.5-flash")
         resposta = model.generate_content(prompt)
-        return resposta.text.strip()
+
+        # Converte Markdown para html
+        html_formatado = markdown.markdown(resposta.text.strip())
+
+        return html_formatado
     except Exception as e:
         return f"Ocorreu um erro ao gerar a resposta: {str(e)}"
