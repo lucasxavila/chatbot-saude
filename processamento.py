@@ -9,6 +9,12 @@ def extrair_texto_pdf(caminho_pdf):
     doc.close()
     return texto
 
+def extrair_textos_pdfs(lista_caminhos_pdf):
+    texto_total = ""
+    for caminho in lista_caminhos_pdf:
+        texto_total += extrair_texto_pdf(caminho) + "\n"
+    return texto_total
+
 nlp = spacy.load("pt_core_news_sm")
 
 def extrair_intencao(texto_usuario):
