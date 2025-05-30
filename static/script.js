@@ -28,3 +28,10 @@ async function enviarMensagem() {
     `;
     container.scrollTop = container.scrollHeight;
 }
+
+document.getElementById("entrada").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Impede quebra de linha
+        enviarMensagem();
+    }
+});
