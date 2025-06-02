@@ -24,7 +24,7 @@ def perguntar():
     dados = request.get_json()
     pergunta = dados["mensagem"].strip().lower()
 
-    saudacoes = ["oi", "olá", "bom dia", "boa tarde", "boa noite"]
+    saudacoes = ["oi", "ola", "olá", "bom dia", "boa tarde", "boa noite"]
     despedidas = ["tchau", "até mais", "adeus", "obrigado", "obrigada", "valeu", "até", "até logo", "até breve", "flw", "falou", "encerrar", "fim"]
 
     # Verifica se é uma saudação
