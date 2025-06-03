@@ -53,7 +53,7 @@ def gerar_resposta(pergunta, _contexto=None):
             "não contém", "não menciona", "não mencionei", "não encontrei", "não fala sobre",
             "não aborda", "não há informação", "não foi encontrado", "não está no texto",
             "não está disponível", "não encontrei nada sobre", "não está presente no texto",
-            "não consigo responder"
+            "não consigo responder", "política"
         ]
         if any(termo in texto for termo in termos_fora_do_tema):
             return None  # Isso vai acionar a resposta padrão no app.py
