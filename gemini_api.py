@@ -5,14 +5,12 @@ import numpy as np
 import markdown
 from dotenv import load_dotenv
 
-load_dotenv()  # Carrega a chave da API do .env
+load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-# Carrega embeddings
 with open("index/vetores.json", "r", encoding="utf-8") as f:
     base_de_dados = json.load(f)
 
-# Função para gerar embedding da pergunta
 def gerar_embedding(texto):
     response = genai.embed_content(
         model="models/embedding-001",
@@ -27,7 +25,6 @@ def similaridade(v1, v2):
     v2 = np.array(v2)
     return np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
 
-# Busca os chunks mais similares
 def buscar_chunks_relevantes(pergunta, top_k=5):
     emb_pergunta = gerar_embedding(pergunta)
     similares = sorted(base_de_dados, key=lambda x: similaridade(x["embedding"], emb_pergunta), reverse=True)
@@ -48,7 +45,6 @@ def gerar_resposta(pergunta, _contexto=None):
 
         texto = resposta.text.strip().lower()
 
-        # Verificação: resposta provavelmente fora do tema
         termos_fora_do_tema = [
             "não contém", "não menciona", "não mencionei", "não encontrei", "não fala sobre",
             "não aborda", "não há informação", "não foi encontrado", "não está no texto",
@@ -56,9 +52,8 @@ def gerar_resposta(pergunta, _contexto=None):
             "não consigo responder", "política"
         ]
         if any(termo in texto for termo in termos_fora_do_tema):
-            return None  # Isso vai acionar a resposta padrão no app.py
+            return None
 
-        # Converte Markdown para html
         html_formatado = markdown.markdown(resposta.text.strip())
         return html_formatado
     except Exception as e:

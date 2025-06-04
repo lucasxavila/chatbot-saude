@@ -27,7 +27,6 @@ def perguntar():
     saudacoes = ["oi", "ola", "olá", "bom dia", "boa tarde", "boa noite"]
     despedidas = ["tchau", "até mais", "adeus", "obrigado", "obrigada", "valeu", "até", "até logo", "até breve", "flw", "falou", "encerrar", "fim"]
 
-    # Verifica se é uma saudação
     if pergunta in saudacoes:
         resposta = "Olá, sou o chatbot BemViver! No que posso ajudar?"
     elif any(despedida in pergunta for despedida in despedidas):
