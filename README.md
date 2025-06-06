@@ -1,6 +1,6 @@
 # Chatbot Saúde e Bem-Estar
 
-Este é um projeto de chatbot interativo voltado para temas de saúde e bem-estar, construído com Python e Flask no backend, além de HTML, CSS e JavaScript no frontend. O chatbot utiliza a **Gemini API** para processar e responder perguntas dos usuários.
+Este é um projeto de chatbot interativo voltado para temas de saúde e bem-estar, construído com Python e Flask no backend, além de HTML, CSS e JavaScript no frontend. O chatbot utiliza a **Gemini API** para processar e responder perguntas dos usuários, além da técnica de PLN - embeddings.
 
 ## Demonstração
 
