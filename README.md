@@ -6,7 +6,7 @@ Este é um projeto de chatbot interativo voltado para temas de saúde e bem-esta
 
 Interface web simples onde o usuário pode digitar perguntas relacionadas à saúde e receber respostas instantâneas.
 
-Link demonstrando o funcionamento do Chatbot: <a href="https://youtu.be/z3RBn8antK0" target="_blank">https://youtu.be/z3RBn8antK0</a>
+Link demonstrando o funcionamento do Chatbot: <a href="https://youtu.be/z3RBn8antK0">https://youtu.be/z3RBn8antK0</a>
 
 ## Tecnologias Utilizadas
 
