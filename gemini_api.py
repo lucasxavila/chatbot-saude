@@ -1,36 +1,47 @@
 import os
 import json
-import google.generativeai as genai
+import faiss
 import numpy as np
+import google.generativeai as genai
 import markdown
+from functools import lru_cache
 from dotenv import load_dotenv
 
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-with open("index/vetores.json", "r", encoding="utf-8") as f:
+INDEX_PATH = "index/faiss.index"
+VETORES_JSON = "index/vetores.json"
+
+with open(VETORES_JSON, "r", encoding="utf-8") as f:
     base_de_dados = json.load(f)
 
+dim = len(base_de_dados[0]["embedding"])
+index = faiss.IndexFlatL2(dim)
+
+embeddings = np.array([item["embedding"] for item in base_de_dados], dtype="float32")
+index.add(embeddings)
+
+resposta_cache = {}
+
+@lru_cache(maxsize=1000)
 def gerar_embedding(texto):
     response = genai.embed_content(
         model="models/embedding-001",
         content=texto,
         task_type="retrieval_query"
     )
-    return response["embedding"]
-
-# Cálculo de similaridade (cosseno)
-def similaridade(v1, v2):
-    v1 = np.array(v1)
-    v2 = np.array(v2)
-    return np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
+    return tuple(response["embedding"])
 
 def buscar_chunks_relevantes(pergunta, top_k=5):
-    emb_pergunta = gerar_embedding(pergunta)
-    similares = sorted(base_de_dados, key=lambda x: similaridade(x["embedding"], emb_pergunta), reverse=True)
-    return [item["texto"] for item in similares[:top_k]]
+    emb_pergunta = np.array([gerar_embedding(pergunta)], dtype="float32")
+    distancias, indices = index.search(emb_pergunta, top_k)
+    return [base_de_dados[i]["texto"] for i in indices[0]]
 
 def gerar_resposta(pergunta, _contexto=None):
+    if pergunta in resposta_cache:
+        return resposta_cache[pergunta]
+    
     try:
         contexto = "\n".join(buscar_chunks_relevantes(pergunta))
         prompt = (
@@ -55,6 +66,8 @@ def gerar_resposta(pergunta, _contexto=None):
             return None
 
         html_formatado = markdown.markdown(resposta.text.strip())
+        resposta_cache[pergunta] = html_formatado
         return html_formatado
+    
     except Exception as e:
         return f"Ocorreu um erro ao gerar a resposta: {str(e)}"
