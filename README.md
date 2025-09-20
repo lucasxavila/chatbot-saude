@@ -2,9 +2,13 @@
 
 Este é um projeto de chatbot interativo voltado para temas de saúde e bem-estar, construído com Python e Flask no backend, e HTML, CSS e JavaScript no frontend. O chatbot utiliza a **Gemini API** para processar e responder perguntas dos usuários, além da técnica de PLN - embeddings.
 
+Com as últimas melhorias, o chatbot agora conta com cache de respostas e busca semântica otimizada com FAISS, o que torna as respostas mais rápidas e eficientes, especialmente para perguntas repetidas ou similares.
+
 ## Demonstração
 
-Interface web simples onde o usuário pode digitar perguntas relacionadas à saúde e receber respostas instantâneas.
+<img width="750" height="877" alt="image" src="https://github.com/user-attachments/assets/16248443-8a08-4a79-baa3-580e25316a4c" />
+
+Interface web simples onde o usuário pode digitar perguntas apenas relacionadas à saúde e receber respostas instantâneas.
 
 Link demonstrando o funcionamento do Chatbot: <a href="https://youtu.be/z3RBn8antK0">https://youtu.be/z3RBn8antK0</a>
 
@@ -14,6 +18,7 @@ Link demonstrando o funcionamento do Chatbot: <a href="https://youtu.be/z3RBn8an
 - Flask
 - HTML, CSS, JavaScript
 - Gemini API
+- FAISS (busca semântica rápida)
 - Gunicorn (para deploy no Railway)
 - Werkzeug
 - Jinja2
@@ -49,8 +54,10 @@ Link demonstrando o funcionamento do Chatbot: <a href="https://youtu.be/z3RBn8an
 4. Instale as dependências:
    ```bash
    pip install -r requirements.txt
-5. Configure sua chave da API Gemini em um arquivo .env, com a variável: GEMINI_API_KEY=sua-chave
-6. Execute a aplicação:
+5. Configure sua chave da API Gemini em um arquivo ```.env```, com a variável:
+   ```bash
+   GEMINI_API_KEY=sua-chave
+7. Execute a aplicação:
    ```bash
    python app.py
 
@@ -60,5 +67,7 @@ O projeto está configurado para deploy no Railway usando Procfile e runtime.txt
 ### Funcionalidades
 - Interface web simples e responsiva;
 - Integração com a Gemini API para respostas contextuais;
+- Cache de respostas para perguntas repetidas → respostas instantâneas;
+- Busca semântica otimizada com FAISS → pesquisa rápida nos dados indexados;
 - Indexação e pré-processamento de dados para respostas mais precisas;
 - Estrutura modular para facilitar manutenções e melhorias.
