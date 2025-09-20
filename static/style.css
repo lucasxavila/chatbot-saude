@@ -1,4 +1,3 @@
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -7,16 +6,15 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+    background: linear-gradient(to right, black, #696969 );
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Caixa principal do chat */
 .chatbox {
-    background: #ffffff;
+    background: #AEC6CF;
     width: 900px;
     max-width: 95%;
     height: 85vh;
@@ -28,17 +26,15 @@ body {
     overflow: hidden;
 }
 
-/* Título do chatbot */
 .titulo-chat {
     text-align: center;
     font-size: 28px;
     font-weight: 600;
-    color: #007BFF;
+    color: black;
     margin-bottom: 16px;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
 }
 
-/* Área das mensagens */
 #mensagens {
     flex: 1;
     overflow-y: auto;
@@ -50,7 +46,6 @@ body {
     scrollbar-width: thin;
 }
 
-/* Estilo para as mensagens */
 .mensagem {
     max-width: 75%;
     padding: 14px 18px;
@@ -64,25 +59,22 @@ body {
     transform: scale(1.02);
 }
 
-/* Estilo de usuário */
 .user {
     align-self: flex-end;
-    background-color: #d1f7d6;
-    color: #2e7d32;
+    background-color: #333333;
+    color: white;
     text-align: right;
     border-bottom-right-radius: 4px;
 }
 
-/* Estilo de bot */
 .bot {
     align-self: flex-start;
-    background-color: #ffe1e1;
-    color: #8a1f1f;
+    background-color: white;
+    color: #333333;
     text-align: left;
     border-bottom-left-radius: 4px;
 }
 
-/* Entrada de texto */
 #entrada {
     padding: 14px;
     font-size: 18px;
@@ -93,47 +85,33 @@ body {
     transition: border 0.3s ease;
 }
 
+#entrada:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    border-color: #696969;
+}
+
 #entrada:focus {
-    border-color: #007bff;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    border-color: #696969;
     outline: none;
 }
 
-/* Botão */
-button {
-    padding: 14px;
-    font-size: 18px;
-    background: linear-gradient(to right, #007BFF, #0056b3);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-    background: linear-gradient(to right, #0056b3, #003f7f);
-    transform: scale(1.03);
-}
-
-/* Área de entrada com botão lado a lado */
 .input-area {
     display: flex;
     gap: 10px;
     margin-top: 10px;
 }
 
-/* Entrada ajustada para ocupar o máximo de espaço possível */
 #entrada {
     flex: 1;
-    margin-bottom: 0;
+    margin-bottom: 0;   
 }
 
-/* Botão redondo com ícone */
 #send-btn {
     width: 50px;
     height: 50px;
     font-size: 24px;
-    background: linear-gradient(to right, #007BFF, #0056b3);
+    background: linear-gradient(to right, #696969, #ccc);
     color: white;
     border: none;
     border-radius: 50%;
@@ -145,6 +123,6 @@ button:hover {
 }
 
 #send-btn:hover {
-    background: linear-gradient(to right, #0056b3, #003f7f);
+    background: linear-gradient(to right, black, #696969);
     transform: scale(1.1);
 }
